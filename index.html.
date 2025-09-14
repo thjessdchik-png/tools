@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced AI Image Compressor</title>
+<style>
+/* Reset & Body */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+body{background:#f0f2f5;color:#1f2937;}
+
+/* Header */
+header{background:#2563eb;color:#fff;padding:20px;text-align:center;position:sticky;top:0;z-index:100;}
+header nav a{margin:0 12px;color:#fff;text-decoration:none;font-weight:bold;transition:0.3s;}
+header nav a:hover{text-decoration:underline;}
+
+/* Main container */
+main{max-width:1100px;margin:40px auto;background:#fff;padding:30px;border-radius:15px;box-shadow:0 5px 25px rgba(0,0,0,0.1);display:flex;flex-wrap:wrap;justify-content:space-between;}
+
+/* Compressor Section */
+.compressor{flex:1 1 600px; padding:20px;}
+h1{text-align:center;color:#2563eb;margin-bottom:20px;}
+input[type="file"]{display:block;margin:20px auto;}
+label{display:block;text-align:center;margin:10px 0;font-weight:bold;}
+input[type="range"]{display:block;margin:0 auto 20px auto;width:80%;}
+button{display:block;margin:20px auto;padding:15px 35px;font-size:18px;font-weight:bold;color:#fff;background:#2563eb;border:none;border-radius:50px;cursor:pointer;transition:0.3s;box-shadow:0 5px 20px rgba(0,0,0,0.2);}
+button:hover{background:#1e40af;}
+.preview{text-align:center;margin-top:25px;}
+.preview img{max-width:100%;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+a.download-btn{display:none;margin:20px auto;padding:12px 30px;background:#10b981;color:#fff;font-weight:bold;border-radius:50px;text-decoration:none;transition:0.3s;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+a.download-btn:hover{background:#059669;}
+
+/* Ads Section */
+.ads{flex:0 0 250px;margin-left:20px;display:flex;flex-direction:column;gap:20px;}
+.ad-placeholder{background:#f3f4f6;border:1px dashed #ccc;padding:15px;text-align:center;color:#888;font-size:14px;}
+
+/* Footer */
+footer{text-align:center;margin-top:40px;padding:20px;color:#6b7280;}
+
+/* Responsive */
+@media(max-width:900px){main{flex-direction:column;} .ads{margin-left:0;flex:1 1 auto;}}
+</style>
+</head>
+<body>
+
+<header>
+Advanced AI Image Compressor
+<nav>
+<a href="image-compress.html">Compressor</a>
+<a href="../about.html">About</a>
+<a href="../contact.html">Contact</a>
+<a href="../privacy.html">Privacy</a>
+<a href="../terms.html">Terms</a>
+<a href="../faq.html">FAQ</a>
+<a href="../guides.html">Guides</a>
+</nav>
+</header>
+
+<main>
+<!-- Compressor Section -->
+<div class="compressor">
+<h1>Upload & Compress Your Image</h1>
+<input type="file" accept="image/*" id="imgInput">
+<label>Compression Quality: <span id="qualityValue">60</span>%</label>
+<input type="range" min="10" max="100" value="60" id="qualitySlider" oninput="updateQuality(this.value)">
+<button onclick="compressImage()">Compress & Preview</button>
+<div class="preview" id="preview"></div>
+<a id="downloadLink" class="download-btn">Download Compressed Image</a>
+
+<!-- Inline Ads -->
+<div class="ad-placeholder">Ad Here</div>
+<div class="ad-placeholder">Ad Here</div>
+</div>
+
+<!-- Sidebar Ads -->
+<div class="ads">
+<div class="ad-placeholder">Top Sidebar Ad</div>
+<div class="ad-placeholder">Middle Sidebar Ad</div>
+<div class="ad-placeholder">Bottom Sidebar Ad</div>
+</div>
+</main>
+
+<!-- Footer Ads -->
+<div class="ad-placeholder" style="max-width:1100px;margin:20px auto;">Footer Ad Here</div>
+
+<footer>© 2025 Advanced AI Image Compressor</footer>
+
+<script>
+let compressedData=null;
+
+function updateQuality(val){document.getElementById('qualityValue').innerText=val;}
+
+function compressImage(){
+const file=document.getElementById('imgInput').files[0];
+if(!file){alert("Please select an image first!");return;}
+const reader=new FileReader();
+reader.onload=function(e){
+const img=new Image();img.src=e.target.result;
+img.onload=function(){
+const canvas=document.createElement("canvas");
+const ctx=canvas.getContext("2d");
+const maxWidth=1000;
+const scale=img.width>maxWidth?maxWidth/img.width:1;
+canvas.width=img.width*scale;canvas.height=img.height*scale;
+ctx.drawImage(img,0,0,canvas.width,canvas.height);
+const quality=document.getElementById("qualitySlider").value/100;
+compressedData=canvas.toDataURL("image/jpeg",quality);
+document.getElementById("preview").innerHTML="<img src='"+compressedData+"'>";
+const link=document.getElementById("downloadLink");
+link.href=compressedData;
+link.download=file.name.replace(/\.[^/.]+$/,"")+"-compressed.jpg";
+link.style.display="inline-block";
+}};
+reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>
