@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Compressor Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f2f5; color: #333; }
+    header, footer { background: #007BFF; color: white; padding: 15px; text-align: center; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .container { max-width: 900px; margin: auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 3px 12px rgba(0,0,0,0.1); margin-top: 20px; }
+    section { display: none; animation: fadeIn 0.5s; }
+    section.active { display: block; }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    button { padding: 10px 20px; border: none; background: #007BFF; color: white; border-radius: 6px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #0056b3; }
+    input[type="file"], input[type="range"] { margin: 12px 0; }
+    .preview { margin-top: 15px; }
+    .preview img { max-width: 100%; border: 1px solid #ccc; border-radius: 6px; }
+    form input, form textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; }
+    form button { width: 100%; }
+    .quality-label { margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Image Compressor Tool</h1>
+    <nav>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('compress')">Compressor</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('privacy')">Privacy</a>
+      <a href="#" onclick="showPage('terms')">Terms</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Home -->
+    <section id="home" class="active">
+      <h2>Welcome to Image Compressor Tool</h2>
+      <p>Compress your images online for free while maintaining high quality. No signup, no watermark.</p>
+      <button onclick="showPage('compress')">Start Compressing</button>
+    </section>
+
+    <!-- Compressor -->
+    <section id="compress">
+      <h2>Upload and Compress</h2>
+      <input type="file" accept="image/*" onchange="loadImage(event)">
+      <div>
+        <label class="quality-label">Compression Quality: <span id="qualityValue">60</span>%</label>
+        <input type="range" min="10" max="100" value="60" id="qualitySlider" oninput="updateQuality(this.value)">
+      </div>
+      <div id="preview" class="preview"></div>
+      <button id="downloadBtn" style="display:none;" onclick="downloadImage()">Download Image</button>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We provide a free, fast and reliable tool to compress your images online.
+      No signup required, no watermarks, just quality compression.</p>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy">
+      <h2>Privacy Policy</h2>
+      <p>We respect your privacy. Images are processed locally in your browser 
+      and never uploaded to our servers. Your data remains safe with you.</p>
+    </section>
+
+    <!-- Terms -->
+    <section id="terms">
+      <h2>Terms & Conditions</h2>
+      <p>By using this site, you agree that the tool is provided "as is". 
+      We are not responsible for any loss of data or damage caused. 
+      This service is free for personal use.</p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </div>
+
+  <footer>© 2025 Image Compressor | All rights reserved</footer>
+
+  <script>
+    let compressedData = null;
+
+    function showPage(pageId) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+    }
+
+    function updateQuality(val) {
+      document.getElementById("qualityValue").innerText = val;
+      if (window.currentFile) {
+        loadImage({ target: { files: [window.currentFile] } });
+      }
+    }
+
+    function loadImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      window.currentFile = file;
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target.result;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          const maxWidth = 800;
+          const scale = img.width > maxWidth ? maxWidth / img.width : 1;
+          canvas.width = img.width * scale;
+          canvas.height = img.height * scale;
+
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const quality = document.getElementById("qualitySlider").value / 100;
+          compressedData = canvas.toDataURL("image/jpeg", quality);
+
+          document.getElementById("preview").innerHTML = "<img src='" + compressedData + "' alt='Preview'>";
+          document.getElementById("downloadBtn").style.display = "block";
+        };
+      };
+    }
+
+    function downloadImage() {
+      if (!compressedData) return;
+      const link = document.createElement("a");
+      link.href = compressedData;
+      link.download = "compressed.jpg";
+      link.click();
+    }
+  </script>
+</body>
+</html>
