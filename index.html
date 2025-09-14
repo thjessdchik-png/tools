@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Image Compressor - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+    body {
+      background: #f8fafc;
+      color: #1f2937;
+    }
+    header {
+      background: #ffffff;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #2563eb;
+      text-decoration: none;
+    }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #2563eb;
+    }
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+    }
+    .hero h1 {
+      font-size: 52px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .hero p {
+      font-size: 20px;
+      max-width: 700px;
+      margin-bottom: 40px;
+    }
+    .cta-btn {
+      background: #fff;
+      color: #2563eb;
+      padding: 15px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    .cta-btn:hover {
+      background: #f1f5f9;
+    }
+    .features {
+      padding: 80px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      background: #fff;
+    }
+    .feature {
+      text-align: center;
+      padding: 30px;
+      border-radius: 16px;
+      background: #f9fafb;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .feature:hover {
+      transform: translateY(-10px);
+    }
+    .feature h3 {
+      margin-bottom: 15px;
+      color: #2563eb;
+    }
+    .feature a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .call-action {
+      background: #2563eb;
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .call-action h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .call-action a {
+      background: #fff;
+      color: #2563eb;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .call-action a:hover {
+      background: #f1f5f9;
+    }
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      text-align: center;
+      padding: 20px;
+    }
+    footer a {
+      color: #9ca3af;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo">AI Image Compressor</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="/tools/image-compress.html">Compressor</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Smart Image Compression with AI</h1>
+    <p>Compress your images instantly without losing quality. Save storage, increase speed, and keep clarity.</p>
+    
+    <!-- ✅ Compress Now button points to /tools/image-compress.html -->
+    <a href="/tools/image-compress.html" class="cta-btn">🚀 Compress Now</a>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <a href="/tools/image-compress.html" class="feature">
+      <h3>⚡ Instant Results</h3>
+      <p>Upload and get your compressed images in seconds.</p>
+    </a>
+    <a href="/tools/image-compress.html" class="feature">
+      <h3>🎯 High Quality</h3>
+      <p>Smart AI keeps your image sharp & clear after compression.</p>
+    </a>
+    <a href="/tools/image-compress.html" class="feature">
+      <h3>🔒 100% Secure</h3>
+      <p>Your images are processed safely in your browser.</p>
+    </a>
+    <a href="/tools/image-compress.html" class="feature">
+      <h3>📱 Works Everywhere</h3>
+      <p>Fully responsive design, use it on any device.</p>
+    </a>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="call-action">
+    <h2>Ready to Optimize Your Images?</h2>
+    <!-- ✅ Start Compressing button points to /tools/image-compress.html -->
+    <a href="/tools/image-compress.html">⚡ Start Compressing</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AI Image Compressor | All Rights Reserved</p>
+    <p>
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="terms.html">Terms & Conditions</a>
+    </p>
+  </footer>
+</body>
+</html>
